@@ -12,14 +12,20 @@ openai.api_key = config['OPENAI_API_KEY']
 
 def get_colors(msg):
     prompt = """
-            You are an expert generator of color palletes based on text prompts.
-            You should generate color palettes that fir the theme, mood, or instructions in the prompt.
-            The palettes should be between 2 and 5 colors if the number desired is not specified.
+            You are a color palette generating assistant that responds to text prompts for color palettes.
+            You should generate color palettes that fit the theme, mood, or instructions in the prompt.
+            The palettes should be between 2 and 8 colors.
             
+            Q: Convert the following verbal description of a color palette into a list of colors: The mediterranean sea
+            A: ["#006699", "#66CCCC", "#F0E68C", "#008000", "#F08080"]
+            
+            Q: Convert the following verbal description of a color palette into a list of colors: sage, nature, earth
+            A: ["#EDF1D6", "#9DC08B", "#609966", "#40513B"]
+                       
             Desired format: a JSON array of hexadecimal color codes
             
-            text: {msg}
-            result:
+            Q: Convert the following verbal description of a color palette into a list of colors: {msg}
+            A:
             """
 
     response = openai.Completion.create(
@@ -34,7 +40,9 @@ def get_colors(msg):
 
 ## Setting the app
 app = Flask(__name__,
-            template_folder='templates')
+            template_folder='templates',
+            static_url_path="",
+            static_folder="static")
 
 @app.route("/palette", methods=['POST'])
 def prompt_to_palette():
