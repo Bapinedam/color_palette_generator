@@ -16,6 +16,8 @@ def get_colors(msg):
             You should generate color palettes that fit the theme, mood, or instructions in the prompt.
             The palettes should be between 2 and 8 colors.
             
+            Please follow the next example, it's important that the response will be only de list with the colors, no more else
+            
             Q: Convert the following verbal description of a color palette into a list of colors: The mediterranean sea
             A: ["#006699", "#66CCCC", "#F0E68C", "#008000", "#F08080"]
             
@@ -49,6 +51,7 @@ def prompt_to_palette():
 
     query = request.form.get("query")
     colors = get_colors(query)
+    print(colors)
 
     return {"colors": colors}
 

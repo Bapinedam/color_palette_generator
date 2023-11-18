@@ -2,6 +2,11 @@ const form = document.querySelector("#form");
 
 form.addEventListener("submit", function (e) {
     e.preventDefault();
+    getColors()
+
+});
+
+function getColors(){
     const query = form.elements.query.value;
     fetch(
         "/palette", {
@@ -21,7 +26,7 @@ form.addEventListener("submit", function (e) {
         createColorBoxes(colors, container);
 
     });
-});
+}
 
 function createColorBoxes(colors, container){
     container.innerHTML = "";
